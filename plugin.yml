@@ -3,4 +3,4 @@ version: "0.0.0"
 api: ["1.0.0"]
 author: GhostKilllaX, Subroowka
 description: LobbySystem
-main: main.java
+main: LobbySystem.main
