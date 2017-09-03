@@ -18,8 +18,7 @@ public class main extends PluginBase implements Listener{
     public void onEnable(){
         getServer().getPluginManager().registerEvents(this, this);
     }
-    
-    
+     
     
     public void putitems(Player pl){
         inv.put(pl, pl.getInventory().getContents());
