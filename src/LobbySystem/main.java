@@ -21,8 +21,6 @@ public class main extends PluginBase implements Listener{
     
     
     
-    
-    
     public void putitems(Player pl){
         inv.put(pl, pl.getInventory().getContents());
         pl.getInventory().clearAll();
