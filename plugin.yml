@@ -1,0 +1,6 @@
+name: LobbySystem
+version: "0.0.0"
+api: ["1.0.0"]
+author: GhostKilllaX, syntaxerrorunexpected
+description: LobbySystem
+main: main.java
