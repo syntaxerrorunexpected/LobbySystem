@@ -12,6 +12,7 @@ import cn.nukkit.event.player.PlayerTeleportEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.nbt.tag.CompoundTag;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,8 @@ public class main extends PluginBase implements Listener{
         inv.put(pl, pl.getInventory().getContents());
         pl.getInventory().clearAll();
         for(String i : this.getConfig().getStringList("items")){
-            String it[] = i.split("|");
+            String it[] = i.split("\\|");
+            this.getLogger().debug(Arrays.toString(it));
             if(it.length<3){
                 this.getLogger().error("invalid item syntax... should be \"itemid|slot|name\"");
             }
@@ -44,12 +46,13 @@ public class main extends PluginBase implements Listener{
                 this.getLogger().error("invalid slot... ");
             }
             String name = it[2];
-            item.setCustomName(name);     
+            item = item.setCustomName(name);
             if(it.length==4){
                 CompoundTag nbt = new CompoundTag();
                 nbt.putString("cmd", it[3]);
                 item.setNamedTag(nbt);
             }
+            this.getLogger().debug(item.toString());
             pl.getInventory().addItem(item);
         }
     }
@@ -87,18 +90,19 @@ public class main extends PluginBase implements Listener{
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false)
     public void ontab(PlayerInteractEvent ev){
         if(ev.getPlayer().getLevel().getName().equals(this.getConfig().getString("level"))){
-            if(ev.getItem().getNamedTag().exist("cmd")){
                 String cmd = ev.getItem().getNamedTag().getString("cmd");
+                if(cmd == null){
+                    return;
+                }
                 cmd = cmd.replaceAll("%p", ev.getPlayer().getName());
                 if(cmd.startsWith("tpto")){
-                    cmd = cmd.replaceFirst("tp", "");
+                    cmd = cmd.replaceFirst("tpto", "");
                     cmd = cmd.replaceFirst(" ", "");
                     String xyz[] = cmd.split(" ");
                     ev.getPlayer().teleport(new Vector3(Integer.parseInt(xyz[0]), Integer.parseInt(xyz[1]), Integer.parseInt(xyz[0])));
                     return;
                 }
                 this.getServer().dispatchCommand(this.getServer().getConsoleSender(), cmd);
-            }               
         }
     }
 }
