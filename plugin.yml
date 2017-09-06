@@ -1,6 +1,6 @@
 name: LobbySystem
-version: "0.0.0"
+version: "0.9"
 api: ["1.0.0"]
-author: GhostKilllaX, Subroowka
+author: GhostKilllaX
 description: LobbySystem
 main: LobbySystem.main
