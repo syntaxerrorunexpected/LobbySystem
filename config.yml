@@ -1,0 +1,9 @@
+#Default config
+level: world
+items:
+- 257|1|Lobby|say hi
+- 273|2|Items|tpto 1 1 1
+- 155|4|new%nline|ilist items2
+items2:
+- 144|1|second%nlists!|say %p yaay
+- 152|2|Back!|ilist items
