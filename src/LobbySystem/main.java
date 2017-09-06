@@ -21,6 +21,13 @@ import java.util.Map;
 
 public class main extends PluginBase implements Listener{
     
+    private String[] badWords = new String[] {
+			"fuck",
+			"mist",
+			"spacken"
+	};
+	
+    
     public Map<Player, Map> inv = new HashMap<>();
     
     @Override
@@ -165,4 +172,19 @@ public class main extends PluginBase implements Listener{
         }
     }   
     public static boolean isInteger(String s){ boolean isValidInteger = false;try{Integer.parseInt(s);isValidInteger = true;}catch (NumberFormatException ex){ }return isValidInteger;}
+     private String replaceBadWords(String message) {
+    	message = message.toLowerCase();
+    	
+    	for(String word : badWords) {
+    		word = word.toLowerCase();
+    		
+    		message = message.replace(word, String.join("",Collections.nCopies(word.length(),   "*")));
+    	}
+    	
+    	return message;
+   
+     }
+    }
+    
+
 }
